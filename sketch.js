@@ -104,7 +104,7 @@ function draw(){
   plain.visible = false;
 
 if(mousePressedOver(start)){
-  gameState = SERVE;
+  gameState = PLAY;
   plain.y = 50;
   score = 0;
 }
