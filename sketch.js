@@ -1,13 +1,7 @@
 var plain, plainImg;
 var city, cityImg;
 var birdImg, bird1Img, bird2Img;
-var gameState = PLAY;
-var PLAY = 1;
-var END = 2;
 var edges;
-var bird;
-var start, startImg;
-var gameOver, gameOverImg;
 
 function preload(){
   
@@ -16,16 +10,12 @@ function preload(){
   birdImg = loadImage("bird2.png");
   bird1Img = loadImage("bird.png");
   bird2Img = loadImage("bird4.png");
-  gameOverImg = loadImage("gameOver.png");
-  startImg = loadImage("start_icon.png");
   
   
 }
 
 function setup(){
   createCanvas(800,800);  
-  
-  birdG = new Group();
 
   city = createSprite(400,400,0,0);
   city.addImage(cityImg);
@@ -35,64 +25,22 @@ function setup(){
   plain = createSprite(20,350,0,0);
   plain.addImage(plainImg);
   plain.scale = 0.35;
-  
-  start = createSprite(400,400,10,10);
-  start.addImage(startImg);
-  start.scale = 1.2;
-
-  gameOver = createSprite(400,300,10,10);
-  gameOver.addImage(gameOverImg);
-  gameOver.visible = false;
-  gameOver.scale = 0.7;
 
 }
 
 function draw(){
   background(0);
   edges = createEdgeSprites();
-  
-  city.visible = false;
-  plain.visible = false;
-
-if(mousePressedOver(start)){
-  gameState = PLAY;
-  plain.y = 50;
-  score = 0;
-} 
-  
-  if(gameState === PLAY){
-  
-    gameOver.visible = false;
+ 
     plain.visible = true;
     city.visible = true;
-    start.y = 1000;
 
     plain.y = mouseY;
   
   
-  if(plain.isTouching(birdG)){
-    gameState = END;
-  }
-  
   plain.collide(edges);
   
   bird();
-
-  }
-
-  
-  if(gameState === END){
-    gameOver.visible = true;
-    birdG.destroyEach();
-    start.y = 400;
-
-    if(mousePressedOver(start)){
-      gameState = PLAY;
-      plain.y = 50;
-      score = 0;
-    }
-
-  }  
 
   drawSprites();
 
