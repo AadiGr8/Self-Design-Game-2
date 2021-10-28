@@ -25,7 +25,7 @@ function setup(){
   city.velocityX = 0;
   city.scale = 2;
   
-  plain = createSprite(20,350,0,0);
+  plain = createSprite(20,mouseY,0,0);
   plain.addImage(plainImg);
   plain.scale = 0.35;
 
@@ -35,8 +35,6 @@ function draw(){
   background(0);
   edges = createEdgeSprites();
   
-  plain.y = mouseY;
-    
   plain.collide(edges);
   
   bird();
@@ -51,6 +49,7 @@ function bird(){
   bird.lifetime = -1;
   bird.velocityX = -4;
   bird.y = Math.round(random(10,750));
+  birdG.add(bird);
   
   var rand = Math.round(random(1,3))
     switch(rand){
@@ -69,7 +68,6 @@ function bird(){
       default:break;
     }
     
-    birdG.add(bird);
   
   }
 }
