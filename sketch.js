@@ -54,7 +54,7 @@ function setup(){
   diamondG = new Group();
   ufoG = new Group();
   ufo2G = new Group();
-  missileG = new Group();
+  missileG = new Group(); 
 
   city = createSprite(400,400,0,0);
   city.addImage(cityImg);
@@ -77,7 +77,7 @@ function setup(){
 
   getReady = createSprite(400,325,10,10);
   getReady.addImage(getReadyImg);
-  getReady.visible = true;
+  getReady.visible = false;
   getReady.scale = 0.7;
   
   sky = createSprite(400,400,10,10);
@@ -99,8 +99,6 @@ function draw(){
   background(0);
   edges = createEdgeSprites();
   
-  plain.visible = false;
-  getReady.visible = false;
   start.visible = true;
   city.visible = false;
   plain.visible = false;
@@ -111,38 +109,7 @@ if(mousePressedOver(start)){
   score = 0;
 }
 
-  if(gameState === SERVE){
 
-    textSize(30);
-    fill("blue");
-    stroke("blue");
-    text("The ufo's are attacking us we need to destroy them.",50,250);
-    text("But the birds should not be harmed.",150,285);
-
-    textSize(25);
-    stroke("orange");
-    fill("orange");
-    text("Shoot the ufo's out",300,425);
-    text("Collect the stars and diamond",250,455);
-    text("Escape from the birds",285,485);
-
-    fill("lime");
-    stroke("lime");
-    text("NEXT",725,785);
-
-    textSize(30);
-    fill("cyan");
-    stroke("cyan");
-    text("Instructions :",325,375);
-
-    if(mousePressedOver(next)){
-      gameState = PLAY;
-    }
-
-    start.y = 1000;
-    gameOver.visible = false;
-
-}
   
   
   if(gameState === PLAY){
@@ -156,70 +123,22 @@ if(mousePressedOver(start)){
 
     plain.y = mouseY;
   
-  if(keyDown("space")){
-    missile();
-  }
- 
+  
   if(plain.isTouching(birdG)){
     gameState = END;
   }
-
-  if(plain.isTouching(ufoG)){
-    gameState = END;
-  }
-
-  if(missileG.isTouching(ufoG)){
-    ufoG.destroyEach();
-    score = score + 1;
-  }
-  
-  if(missileG.isTouching(ufo2G)){
-    ufo2G.destroyEach();
-    score = score + 1;
-  }
-  
-  if(plain.isTouching(ufo2G)){
-    gameState = END;
-  }
-
-  if(plain.isTouching(starG)){
-    score = score + 1;
-    starG.destroyEach();
-  }
-    
-  
-  if(plain.isTouching(star2G)){
-    score = score + 2;
-    star2G.destroyEach();
-  }
-      
-  if(plain.isTouching(diamondG)){
-    score = score + 3;
-    diamondG.destroyEach();
-  }
-
   
   plain.collide(edges);
   
   bird();
-  star();
-  diamond();
-  ufo();
 
   }
 
   
   if(gameState === END){
     gameOver.visible = true;
-    sky.visible = false;
-    ufo2G.destroyEach();
-    ufoG.destroyEach();
     birdG.destroyEach();
-    starG.destroyEach();
-    star2G.destroyEach();
-    diamondG.destroyEach();
     start.y = 400;
-    missileG.destroyEach();
 
     if(mousePressedOver(start)){
       gameState = PLAY;
@@ -230,16 +149,6 @@ if(mousePressedOver(start)){
   }  
 
   drawSprites();
-
-  stroke("red");
-  fill("red");
-  textSize(25);
-  text("SCORE : "+score,340,750);
-  
-  stroke("yellow");
-  fill("yellow");
-  textSize(25);
-  text("Press              to shoot",267,785);
 
   }
 
@@ -271,81 +180,3 @@ function bird(){
   
   }
 }
-
-function star(){
-  if(frameCount%250===0){
-  var star = createSprite(850,0,10,10)
-  star.lifetime = -1;
-  star.velocityX = -4;
-  star.y = Math.round(random(10,750));
-  
-  var rand = Math.round(random(1,2))
-  switch (rand){
-      
-    case 1: star.addImage(starImg);
-    star.scale = 0.5;
-    starG.add(star);
-    break;
-    
-    case 2: star.addImage(star2Img);
-    star.scale = 0.3;
-    star2G.add(star);
-    break;
-  
-    default:break;
-  
-  }  
-    
-  }
-}
-
-function diamond(){
-  if(frameCount % 300 === 0){
-  var diamond = createSprite(850,0,0,0);
-    diamond.addImage(diamondImg);
-    diamond.scale = 0.15;
-    diamond.y = Math.round(random(10,750));
-    diamond.lifetime = -1;
-    diamond.velocityX = -4;
-    diamondG.add(diamond);
-  }
-}
-
-function ufo(){
-  if(frameCount%250===0){
-  var ufo = createSprite(850,0,10,10)
-  ufo.lifetime = -1;
-  ufo.velocityX = -4;
-  ufo.y = Math.round(random(10,750));
-  
-  var rand = Math.round(random(1,2))
-  switch (rand){
-      
-    case 1: ufo.addImage(ufoImg);
-    ufo.scale = 0.4;
-    ufoG.add(ufo);
-    break;
-    
-    case 2: ufo.addImage(ufo2Img);
-    ufo.scale = 0.4;
-    ufo2G.add(ufo);
-    break;
-  
-    default:break;
-  
-  }  
-    
-  }
-}
-
-function missile(){
-  var missile = createSprite(80,0,0,0);
-    missile.addImage(missileImg);
-    missile.scale = 0.1;
-    missile.y = plain.y/2;
-    missile.lifetime = 300;
-    missile.velocityX = 3;
-    missile.y = mouseY;
-    missileG.add(missile);
-    missile.visible = true;
-  }
