@@ -17,7 +17,7 @@ function preload(){
   bird1Img = loadImage("bird.png");
   bird2Img = loadImage("bird4.png");
   gameOverImg = loadImage("gameOver.png");
-  startImg = loadImage("start.png");
+  startImg = loadImage("start_icon.png");
   
   
 }
