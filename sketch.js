@@ -1,7 +1,7 @@
 var plain, plainImg;
 var city, cityImg;
 var birdImg, bird1Img, bird2Img;
-var gameState = SERVE;
+var gameState = PLAY;
 var SERVE = 0;
 var PLAY = 1;
 var END = 2;
@@ -88,6 +88,7 @@ function setup(){
   space = createSprite(380,777,10,10);
   space.addImage(spaceImg);
   space.scale = 0.25;
+  space.visible = false;
   
   next = createSprite(750,760,10,10);
   next.addImage(nextImg);
@@ -99,7 +100,6 @@ function draw(){
   background(0);
   edges = createEdgeSprites();
   
-  start.visible = true;
   city.visible = false;
   plain.visible = false;
 
@@ -107,10 +107,7 @@ if(mousePressedOver(start)){
   gameState = PLAY;
   plain.y = 50;
   score = 0;
-}
-
-
-  
+} 
   
   if(gameState === PLAY){
   
