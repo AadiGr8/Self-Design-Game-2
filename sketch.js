@@ -2,6 +2,7 @@ var plain, plainImg;
 var city, cityImg;
 var birdImg, bird1Img, bird2Img;
 var edges;
+var birdG;
 
 function preload(){
   
@@ -16,6 +17,8 @@ function preload(){
 
 function setup(){
   createCanvas(800,800);  
+  
+  birdG = new Group();
 
   city = createSprite(400,400,0,0);
   city.addImage(cityImg);
