@@ -31,13 +31,9 @@ function setup(){
 function draw(){
   background(0);
   edges = createEdgeSprites();
- 
-    plain.visible = true;
-    city.visible = true;
-
-    plain.y = mouseY;
   
-  
+  plain.y = mouseY;
+    
   plain.collide(edges);
   
   bird();
