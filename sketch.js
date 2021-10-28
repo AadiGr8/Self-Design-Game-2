@@ -35,7 +35,6 @@ function setup(){
   plain = createSprite(20,350,0,0);
   plain.addImage(plainImg);
   plain.scale = 0.35;
-  plainG.add(plain);
   
   start = createSprite(400,400,10,10);
   start.addImage(startImg);
